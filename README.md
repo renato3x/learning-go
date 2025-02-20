@@ -190,3 +190,7 @@ func main() {
 ```
 
 **DO NOT FORGET**: Regular variables **must be used in your code!**. If you do not use the regular variables you declare, your code will not compile
+
+### 1.4 - Prints
+
+Nothing relevant to say here...
