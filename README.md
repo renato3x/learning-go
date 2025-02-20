@@ -198,3 +198,19 @@ Nothing relevant to say here...
 ### 1.5 - Types
 
 Nothing relevant to say here...
+
+### 1.6 - "Zeros"
+
+In Go, the basic types has the following initial types if you don't initialize with a specific value:
+
+```go
+package main
+
+func main() {
+  var a int // 0
+  var b float64 // 0
+  var c bool // false
+  var d string // empty string
+  var e *int // nil (null) pointer
+}
+```
