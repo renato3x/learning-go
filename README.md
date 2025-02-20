@@ -194,3 +194,7 @@ func main() {
 ### 1.4 - Prints
 
 Nothing relevant to say here...
+
+### 1.5 - Types
+
+Nothing relevant to say here...
