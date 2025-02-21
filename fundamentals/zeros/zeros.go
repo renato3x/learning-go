@@ -2,10 +2,6 @@ package main
 
 import "fmt"
 
-func increment(value *int) {
-  *value += 1
-}
-
 func main() {
   var a int // 0
   var b float64 // 0
