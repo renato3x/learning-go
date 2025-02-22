@@ -376,3 +376,7 @@ func main() {
 }
 ```
 
+### 1.8 - Functions (Basic)
+
+Nothing special...
+
