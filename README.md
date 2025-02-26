@@ -401,3 +401,35 @@ Nothing special...
 Nothing special...
 
 ### [1.13 - Pointers](fundamentals/pointers/pointers.go)
+
+## 2 - Control Structures
+
+### 2.1 - if/else
+
+Just like in a for loop, you can create a variable that can be accessed only within the scope of if/else or if/else-if/else, as the example below:
+
+```go
+package main
+
+import (
+  "fmt"
+  "rand"
+  "time"
+)
+
+func generateAge() int {
+  s := rand.NewSource(time.Now().UnixNano())
+  r := rand.New(s)
+  return r.Intn(30)
+}
+
+func main() {
+  if age := generateAge(); age >= 18 {
+    fmt.Println("You're of legal age")
+  } else if age >= 16 {
+    fmt.Println("You're almost of age")
+  } else {
+    fmt.Println("You're a long way from the age of majority")
+  }
+}
+```
