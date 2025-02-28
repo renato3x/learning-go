@@ -433,3 +433,7 @@ func main() {
   }
 }
 ```
+
+### 2.2 - For (Basic)
+
+Nothing speacial to comment...
