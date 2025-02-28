@@ -436,4 +436,102 @@ func main() {
 
 ### 2.2 - For (Basic)
 
-Nothing speacial to comment...
+Nothing special to comment...
+
+### 2.3 - Switch/Case
+
+The Switch/Case structure has the same idea as other languages. But, instead of the Switch keeping checking all the
+cases even if one has already been answered, when a case is answered, it executes it and stops executing the Switch.
+
+```go
+package main
+
+import "fmt"
+
+func getFruitPrice(fruit string) {
+	switch fruit {
+  case "Orange":
+    fmt.Println("The price from orange is $", 0.59)
+  case "Apple":
+    fmt.Println("The price from apple is $", 0.59)
+  case "Peach":
+    fmt.Println("The price from peach is $", 1.25)
+  case "Mango":
+    fmt.Println("The price from mango is $", 3.25)
+  default:
+    fmt.Println("Fruit", fruit, "not found")
+	}
+}
+
+func main() {
+  getFruitPrice("Orange") // The price from orange is $ 0.59
+  getFruitPrice("Apple") // The price from apple is $ 0.59
+  getFruitPrice("Peach") // The price from peach is $ 1.25
+  getFruitPrice("Mango") // The price from peach is $ 3.25
+  getFruitPrice("Watermelon") // Fruit Watermelon not found
+}
+```
+
+As you can see in the example above, the fruits "Orange" and "Apple" have the same price and show a similar output. So,
+we can simplify this code by using ways that simulate the default switch/case functionality from other languages, which
+is executing multiple cases even if one has already been answered:
+
+You can use the `fallthrough` keyword
+
+```go
+package main
+
+import "fmt"
+
+func getFruitPrice(fruit string) {
+	switch fruit {
+  case "Orange":
+    fallthrough
+  case "Apple":
+    fmt.Println("The price from", fruit ,"is $", 0.59)
+  case "Peach":
+    fmt.Println("The price from peach is $", 1.25)
+  case "Mango":
+    fmt.Println("The price from mango is $", 3.25)
+  default:
+    fmt.Println("Fruit", fruit, "not found")
+	}
+}
+
+func main() {
+  getFruitPrice("Orange") // The price from Orange is $ 0.59
+  getFruitPrice("Apple") // The price from Apple is $ 0.59
+  getFruitPrice("Peach") // The price from peach is $ 1.25
+  getFruitPrice("Mango") // The price from peach is $ 3.25
+  getFruitPrice("Watermelon") // Fruit Watermelon not found
+}
+```
+
+Or you can separate the values using `,`:
+
+```go
+package main
+
+import "fmt"
+
+func getFruitPrice(fruit string) {
+	switch fruit {
+  case "Orange", "Apple":
+    fmt.Println("The price from", fruit ,"is $", 0.59)
+  case "Peach":
+    fmt.Println("The price from peach is $", 1.25)
+  case "Mango":
+    fmt.Println("The price from mango is $", 3.25)
+  default:
+    fmt.Println("Fruit", fruit, "not found")
+	}
+}
+
+func main() {
+  getFruitPrice("Orange") // The price from Orange is $ 0.59
+  getFruitPrice("Apple") // The price from Apple is $ 0.59
+  getFruitPrice("Peach") // The price from peach is $ 1.25
+  getFruitPrice("Mango") // The price from peach is $ 3.25
+  getFruitPrice("Watermelon") // Fruit Watermelon not found
+}
+```
