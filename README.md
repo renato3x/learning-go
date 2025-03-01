@@ -535,3 +535,33 @@ func main() {
   getFruitPrice("Watermelon") // Fruit Watermelon not found
 }
 ```
+
+You can also have a similar functionality from an if/else inside the switch. If you don't specify a variable or value to
+compare in the switch, Go will automatically understand comparison value as `true`, which lets you create cases 
+within the switch that have boolean tests. The first `true` case will be executed
+
+```go
+package main
+
+import "fmt"
+
+func checkAge(age int) {
+  switch {
+  case age < 18:
+    fmt.Println("You are a young")
+  case age < 50:
+    fmt.Println("You are an adult")
+  default:
+    fmt.Println("You are an old")
+  }
+}
+
+func main() {
+  checkAge(17) // You are a young
+  checkAge(18) // You are an adult
+  checkAge(12) // You are a young
+  checkAge(20) // You are an adult
+  checkAge(50) // You are an old
+  checkAge(52) // You are an old
+}
+```
