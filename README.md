@@ -565,3 +565,231 @@ func main() {
   checkAge(52) // You are an old
 }
 ```
+
+
+## 3 - Arrays, Slices & Maps
+
+### 3.1 - Arrays
+
+In Go, an array is a fixed-length sequence of elements of a single type. The length of an array is part of its type, which means that arrays cannot be resized. Here is an example of how to declare and use an array in Go:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  // declaring an array with 4 positions of type int
+  var numbers [4]int
+  fmt.Println(numbers) // [0 0 0 0]
+
+  numbers[0], numbers[1], numbers[2], numbers[3] = 10, 20, 30, 40
+
+  fmt.Println(numbers) // [10 20 30 40]
+
+  sum := 0
+
+  // Looping through the array using a for loop
+  for i := 0; i < len(numbers); i++ {
+    sum += numbers[i]
+  }
+
+  fmt.Printf("Sum: %d\n", sum)
+}
+```
+
+In the example above:
+- We declare an array `numbers` with 4 positions of type `int`.
+- We assign values to each position in the array.
+- We calculate the sum of the numbers using a `for` loop.
+
+### 3.2 - For Range
+
+The `for range` loop in Go is a powerful construct that allows you to iterate over elements in various data structures, such as arrays, slices, maps, and strings. Here is an example of how to use the `for range` loop with an array:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  letters := [...]string{"A", "B", "C", "D"}
+
+  for index, letter := range letters {
+    fmt.Printf("%d) %s\n", index, letter)
+  }
+
+  // ignoring the current index
+  for _, letter := range letters {
+    fmt.Printf("%s\n", letter)
+  }
+}
+```
+
+In the example above:
+- We declare an array `letters` with 4 positions of type `string` using the `[...]` syntax, which allows the compiler to determine the length of the array based on the number of elements provided.
+- We use the `for range` loop to iterate over the array, printing both the index and the value of each element.
+- We use the `for range` loop again to iterate over the array, this time ignoring the index and printing only the values.
+
+The `for range` loop is a convenient way to iterate over elements in a data structure without needing to manage the loop counter manually. The `range` keyword returns both the index and the value of each element in the array, which can be useful for various operations.
+
+### 3.3 - Slices
+
+Slices in Go are a reference to an underlying array. They provide a more flexible and dynamic way to work with collections of data compared to arrays, which have a fixed size. A slice does not store data itself; it only describes a portion of an array. Any modification to a slice affects the original array.
+
+#### **Declaring and Initializing Slices**
+
+Slices can be declared and initialized similarly to arrays, but without specifying a fixed size:
+
+```go
+package main
+
+import (
+  "fmt"
+  "reflect"
+)
+
+func main() {
+  array1 := [3]int{1, 2, 3}  // Fixed-size array
+  slice1 := []int{1, 2, 3}   // Dynamic-size slice
+
+  fmt.Println("Array:", array1)
+  fmt.Println("Slice:", slice1)
+  fmt.Println("Array Type:", reflect.TypeOf(array1))
+  fmt.Println("Slice Type:", reflect.TypeOf(slice1))
+}
+```
+
+#### **Creating a Slice from an Array**
+
+Slices can be derived from arrays using a range of indices:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  array2 := [5]int{1, 2, 3, 4, 5} // Array
+  slice2 := array2[1:3]           // Slice with elements from index 1 to 2
+
+  fmt.Println("Array:", array2)
+  fmt.Println("Slice2:", slice2) // Output: [2, 3]
+}
+```
+
+#### **Slicing with Different Ranges**
+
+Slices can be created using different index ranges:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  array := [5]int{1, 2, 3, 4, 5}
+  sliceA := array[:2]  // Elements from index 0 to 1
+  sliceB := array[2:]  // Elements from index 2 to end
+  sliceC := sliceA[:1] // Extracting a slice from another slice
+
+  fmt.Println("Array:", array)
+  fmt.Println("SliceA:", sliceA) // Output: [1, 2]
+  fmt.Println("SliceB:", sliceB) // Output: [3, 4, 5]
+  fmt.Println("SliceC:", sliceC) // Output: [1]
+}
+```
+
+#### **Modifying a Slice Affects the Original Array**
+
+Since slices reference an underlying array, modifying a slice also modifies the original array:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  array := [5]int{1, 2, 3, 4, 5}
+  slice := array[1:4]
+
+  fmt.Println("Before modification:", array)
+  slice[0] = 99 // Modifies array[1]
+  fmt.Println("After modification:", array)
+  fmt.Println("Slice:", slice) // Output: [99, 3, 4]
+}
+```
+
+#### **Iterating Over a Slice**
+
+A `for` loop can be used to iterate over a slice:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  slice := []int{10, 20, 30, 40, 50}
+
+  for i, value := range slice {
+    fmt.Printf("Index %d: Value %d\n", i, value)
+  }
+}
+```
+
+Slices provide a powerful and efficient way to handle collections of data in Go while maintaining a reference to an underlying array.
+
+#### **Creating Slices Using `make`**
+
+The `make` function allows you to create slices with a predefined length and optional capacity. Unlike declaring slices with literals, `make` provides more control over the internal array backing the slice.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    s := make([]int, 10) // Creates a slice with length 10
+    fmt.Println("Slice:", s)
+
+    s[9] = 50
+    fmt.Println("Modified Slice:", s)
+
+    s = make([]int, 10, 20) // Creates a slice of length 10, but capacity 20
+    fmt.Println("Slice:", s, "Length:", len(s), "Capacity:", cap(s))
+}
+```
+
+**Explanation:**
+- `make([]int, 10)` creates a slice with 10 elements, all initialized to zero.
+- The value at index 9 is modified to `50`, showing that slices can be manipulated like arrays.
+- `make([]int, 10, 20)` creates a slice of length `10`, but the underlying array has a capacity of `20`.
+
+#### **Appending Elements to a Slice**
+
+The `append` function dynamically adds elements to a slice, automatically resizing it if needed.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    s := make([]int, 10, 20)
+    s = append(s, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
+    fmt.Println("After append:", s, "Length:", len(s), "Capacity:", cap(s))
+
+    s = append(s, 1) // Exceeds initial capacity, Go allocates a larger array
+    fmt.Println("After exceeding capacity:", s, "Length:", len(s), "Capacity:", cap(s))
+}
+```
+
+**Explanation:**
+- `append(s, 1, 2, 3, ...)` adds elements to `s`, increasing its length.
+- The first `append` call does not exceed capacity (`20`), so the same underlying array is used.
+- The second `append` call adds another element beyond capacity, forcing Go to allocate a new array with increased size.
+
+Using `make` and `append` together allows efficient slice handling, balancing pre-allocation and dynamic growth.
+
+
