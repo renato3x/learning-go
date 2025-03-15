@@ -792,4 +792,130 @@ func main() {
 
 Using `make` and `append` together allows efficient slice handling, balancing pre-allocation and dynamic growth.
 
+### 3.4 - Map
 
+In Go, a `map` is a data structure that associates keys with values. It is very useful for storing and accessing data efficiently, as long as you know the corresponding key. Keys in a `map` must be of a type that is comparable, such as numbers, strings, or other types that support comparison.
+
+#### **Creating and Initializing a Map**
+
+You can create a `map` using the `make` function or initialize it directly with values:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  // Creating an empty map using make
+  countries := make(map[string]string)
+
+  // Adding elements to the map
+  countries["US"] = "United States"
+  countries["BR"] = "Brazil"
+  countries["JP"] = "Japan"
+
+  fmt.Println("Countries:", countries)
+}
+```
+
+#### **Iterating Over a Map**
+
+You can use a `for range` loop to iterate over the keys and values of a `map`:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  countries := map[string]string{
+    "US": "United States",
+    "BR": "Brazil",
+    "JP": "Japan",
+  }
+
+  for code, name := range countries {
+    fmt.Printf("Country code %s represents %s.\n", code, name)
+  }
+}
+```
+
+#### **Deleting Elements from a Map**
+
+To remove an element from a `map`, use the `delete` function:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  countries := map[string]string{
+    "US": "United States",
+    "BR": "Brazil",
+    "JP": "Japan",
+  }
+
+  fmt.Println("Before deletion:", countries)
+
+  // Removing the element with the key "BR"
+  delete(countries, "BR")
+
+  fmt.Println("After deletion:", countries)
+}
+```
+
+#### **Nested Map**
+
+You can create nested maps, where the values of a `map` are other `map` structures:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  citiesByCountry := map[string]map[string]int{
+    "US": {
+      "New York": 8419600,
+      "Los Angeles": 3980400,
+    },
+    "JP": {
+      "Tokyo": 13929286,
+      "Osaka": 2715000,
+    },
+  }
+
+  for country, cities := range citiesByCountry {
+    fmt.Printf("Cities in %s:\n", country)
+    for city, population := range cities {
+      fmt.Printf("  %s has a population of %d.\n", city, population)
+    }
+  }
+}
+```
+
+#### **Checking for Key Existence**
+
+You can check if a key exists in a `map` using the second return value when accessing the `map`:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  countries := map[string]string{
+    "US": "United States",
+    "BR": "Brazil",
+  }
+
+  if name, exists := countries["JP"]; exists {
+    fmt.Printf("JP represents %s.\n", name)
+  } else {
+    fmt.Println("JP is not in the map.")
+  }
+}
+```
+
+Maps are a powerful tool in Go for associating data efficiently and flexibly. However, remember that they do not guarantee the order of elements when iterating over them.
