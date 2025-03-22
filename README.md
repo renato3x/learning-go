@@ -919,3 +919,5 @@ func main() {
 ```
 
 Maps are a powerful tool in Go for associating data efficiently and flexibly. However, remember that they do not guarantee the order of elements when iterating over them.
+
+## 4 - Functions
