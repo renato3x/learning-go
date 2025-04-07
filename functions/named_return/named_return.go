@@ -20,7 +20,19 @@ func change(p1, p2 int) (first int, second int) {
   return // clean, implicit return (return values of `first` and `second`)
 }
 
+var sum = func(value int) func(x int) int {
+  return func(x int) int {
+    return value + x
+  }
+}
+
 func main() {
   v1, v2 := change(1, 2)
   fmt.Println(v1, v2)
+
+  adder := sum(5)
+
+  fmt.Println(adder(5))
+  fmt.Println(adder(23))
+  fmt.Println(adder(17))
 }
