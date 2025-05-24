@@ -6,7 +6,7 @@ import (
 )
 
 type Product struct {
-	Id    int      `json:"id"`
+	Id    int      `json:"id"` // this a mapping of JSON key to struct field. This isn't mandatory, but it's a good practice
 	Name  string   `json:"name"`
 	Price int      `json:"price"`
 	Tags  []string `json:"tags"`
